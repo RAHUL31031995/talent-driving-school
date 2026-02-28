@@ -1,0 +1,19 @@
+{
+    "name": "talent-motor-driving-school",
+    "buildCommand": "npm install",
+    "startCommand": "node server.js",
+    "envs": [
+        {
+            "key": "EMAIL_USER",
+            "value": "rajkhan999045@gmail.com"
+        },
+        {
+            "key": "EMAIL_PASSWORD",
+            "value": "your_gmail_app_password_here"
+        },
+        {
+            "key": "WHATSAPP_NUMBER",
+            "value": "8595773287"
+        }
+    ]
+}
