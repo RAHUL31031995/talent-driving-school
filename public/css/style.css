@@ -247,6 +247,22 @@ body {
     box-shadow: var(--shadow-lg);
 }
 
+.about-image video {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+    background: #000;
+}
+
+.about-image video::-webkit-media-controls-panel {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.about-image video::-webkit-media-controls-play-button {
+    background-color: var(--accent-color);
+}
+
 /* ============ SERVICES SECTION ============ */
 .services {
     padding: 80px 20px;
