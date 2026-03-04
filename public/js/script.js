@@ -68,16 +68,16 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 
         if (response.ok) {
             // Show success message
-            showNotification('Success! We will contact you soon. Opening WhatsApp...', 'success');
+            showNotification('✅ Inquiry sent! Opening WhatsApp to send your details...', 'success');
 
             // Clear form
             document.getElementById('contactForm').reset();
 
-            // Open WhatsApp if available
+            // Open WhatsApp with pre-filled message
             if (result.whatsappLink) {
                 setTimeout(() => {
                     window.open(result.whatsappLink, '_blank');
-                }, 1000);
+                }, 1500);
             }
         } else {
             showNotification(result.error || 'Failed to submit form. Please try again.', 'error');

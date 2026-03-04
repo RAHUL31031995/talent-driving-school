@@ -38,41 +38,34 @@ app.post('/api/submit-form', async (req, res) => {
   }
 
   try {
-    // Send email
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: `New Inquiry from ${name} - Talent Motor Driving School`,
-      html: `
-        <h2>New Driving School Inquiry</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Mobile:</strong> ${mobile}</p>
-        <p><strong>Email:</strong> ${email || 'Not provided'}</p>
-        <p><strong>Location:</strong> ${location || 'Not specified'}</p>
-        <p><strong>Car Model:</strong> ${carModel || 'Not specified'}</p>
-        <p><strong>Course:</strong> ${course || 'Not specified'}</p>
-        <p><strong>Message:</strong> ${message || 'No message'}</p>
-        <hr>
-        <p>Reply via WhatsApp: <strong>${mobile}</strong></p>
-      `,
-    };
-
-    await transporter.sendMail(mailOptions);
-
-    // WhatsApp message (user will need to open WhatsApp manually)
+    // Create WhatsApp message with form details
     const whatsappMessage = encodeURIComponent(
-      `Hello Talent Motor Driving School,\n\nI am interested in your driving courses.\n\nName: ${name}\nMobile: ${mobile}\nCourse: ${course || 'Not specified'}\n\nPlease get back to me.`
+      `🚗 *New Inquiry from Talent Motor Driving School Website*\n\n` +
+      `*Name:* ${name}\n` +
+      `*Mobile:* ${mobile}\n` +
+      `*Email:* ${email || 'Not provided'}\n` +
+      `*Location:* ${location || 'Not specified'}\n` +
+      `*Car Model:* ${carModel || 'Not specified'}\n` +
+      `*Course:* ${course || 'Not specified'}\n` +
+      `*Message:* ${message || 'No additional message'}\n\n` +
+      `Please respond to this inquiry.`
     );
+    
     const whatsappLink = `https://wa.me/${process.env.WHATSAPP_NUMBER}?text=${whatsappMessage}`;
 
+    // Success response with WhatsApp link
     res.json({
       success: true,
-      message: 'Thank you! We will contact you soon.',
+      message: 'Thank you! Opening WhatsApp to send your inquiry...',
       whatsappLink: whatsappLink,
     });
+
+    // Log the inquiry (optional - for records)
+    console.log(`✅ New Inquiry: ${name} (${mobile}) - Course: ${course}`);
+    
   } catch (error) {
-    console.error('Error sending email:', error);
-    res.status(500).json({ error: 'Failed to submit form. Please try again.' });
+    console.error('Error processing form:', error);
+    res.status(500).json({ error: 'Failed to process inquiry. Please try again.' });
   }
 });
 
