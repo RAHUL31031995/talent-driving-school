@@ -308,6 +308,16 @@ body {
     font-size: 1rem;
 }
 
+.price-tag {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--border-color);
+    font-weight: 600;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
 /* ============ WHY CHOOSE US ============ */
 .why-choose {
     padding: 80px 20px;
